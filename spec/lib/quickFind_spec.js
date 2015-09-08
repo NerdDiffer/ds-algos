@@ -1,5 +1,4 @@
 var QuickFind = require('../../lib/quickFind.js');
-var h = require('../helpers.js');
 
 var assert = require('assert');
 var _ = require('lodash');
@@ -35,7 +34,7 @@ describe('QuickFind', function() {
     });
 
     it('produces this array', function() {
-      assert(h.areTwoArraysEqual(obj.ids, [0,1,2,3,4]));
+      assert.deepEqual(obj.ids, [0,1,2,3,4]);
     });
 
   });
@@ -64,12 +63,12 @@ describe('QuickFind', function() {
 
     it('moves 2 under 1', function() {
       obj.union(1,2);
-      assert(h.areTwoArraysEqual(obj.ids, [0,2,2,3,4]));
+      assert.deepEqual(obj.ids, [0,2,2,3,4]);
     });
 
     it('moves 0 under 4', function() {
       obj.union(0,4);
-      assert(h.areTwoArraysEqual(obj.ids, [4,2,2,3,4]));
+      assert.deepEqual(obj.ids, [4,2,2,3,4]);
     });
 
   });
@@ -78,7 +77,7 @@ describe('QuickFind', function() {
     var anotherObj = new QuickFind(10);
 
     it('instantiating an object with n of 10, produces this array', function() {
-      assert(h.areTwoArraysEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,9]));
+      assert.deepEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,9]);
     });
 
     context('before one union operation', function() {
@@ -88,14 +87,16 @@ describe('QuickFind', function() {
     });
 
     context('after one union operation', function() {
-      anotherObj.union(9, 7);
+      beforeEach('perform a union(9, 7)', function() {
+        anotherObj.union(9, 7);
+      });
 
       it('has count of 9', function() {
         assert(anotherObj.count, 9);
       });
 
       it('moves 9 under 7', function() {
-        assert(h.areTwoArraysEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,7]));
+        assert.deepEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,7]);
       });
 
       it('confirms nodes 7 & 9 are connected', function() {
@@ -108,14 +109,16 @@ describe('QuickFind', function() {
     });
 
     context('after performing a bunch more union operations...', function() {
-      anotherObj.union(9, 5);
-      anotherObj.union(4, 5);
-      anotherObj.union(8, 7);
-      anotherObj.union(3, 8);
-      anotherObj.union(7, 0);
+      beforeEach('perform a bunch of union operations', function() {
+        anotherObj.union(9, 5);
+        anotherObj.union(4, 5);
+        anotherObj.union(8, 7);
+        anotherObj.union(3, 8);
+        anotherObj.union(7, 0);
+      });
 
       it('produces this array', function() {
-        assert(h.areTwoArraysEqual(anotherObj.ids, [0,1,2,0,0,0,6,0,0,0]));
+        assert.deepEqual(anotherObj.ids, [0,1,2,0,0,0,6,0,0,0]);
       });
 
       it('has a count of 4', function() {
