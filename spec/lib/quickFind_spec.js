@@ -1,104 +1,129 @@
 var QuickFind = require('../../lib/quickFind.js');
 var h = require('../helpers.js');
 
-var test = require('tape');
+var assert = require('assert');
 var _ = require('lodash');
 
-test('QuickFind', function(t) {
-  t.plan(6);
+describe('QuickFind', function() {
 
-  t.test('valid values for n', function(u) {
-    u.plan(3);
+  describe('valid values for n', function() {
 
-    u.throws(function() { return new QuickFind(-1); },
-             new Error(),
-             'Throws error if n is less than 0');
+    it('throws error if n is less than 0', function() {
+      assert.throws(function() { return new QuickFind(-1); });
+    });
   
-    u.throws(function() { return new QuickFind(1.1); },
-             new Error(),
-             'Throws error if n is not an integer');
+    it('throws error if n is not an integer', function() {
+      assert.throws(function() { return new QuickFind(1.1); });
+    });
 
-    u.doesNotThrow(function() { return new QuickFind(0); },
-                   new Error(),
-                   'integer 0 is a valid value for n');
+    it('does not throw error when n is 0', function() {
+      assert.doesNotThrow(function() { return new QuickFind(0); });
+    });
+
   });
 
   var obj = new QuickFind(5);
 
-  t.test('#ids', function(u) {
-    u.plan(3);
-    u.ok(_.isArray(obj.ids), '#ids is an array');
-    u.equal(obj.ids.length, 5, '#ids has a length of 5');
-    u.ok(h.areTwoArraysEqual(obj.ids, [0,1,2,3,4]), 'produces this array');
+  describe('#ids', function() {
+
+    it('returns an array', function() {
+      assert(_.isArray(obj.ids), '#ids is an array');
+    });
+
+    it('#ids has a length of 5', function() {
+      assert.equal(obj.ids.length, 5);
+    });
+
+    it('produces this array', function() {
+      assert(h.areTwoArraysEqual(obj.ids, [0,1,2,3,4]));
+    });
+
   });
 
-  t.test('#count', function(u) {
-    u.plan(1);
-    u.equal(obj.count, 5, 'returns 5');
+  describe('#count', function() {
+    it('returns an array', function() {
+      assert.equal(obj.count, 5);
+    });
   });
 
-  t.test('#connected', function(u) {
-    u.plan(2);
-    u.ok(_.isFunction(obj.connected), 'there is a function named #connected');
-    u.notOk(obj.connected(1,2), 'objects 1 & 2 are not connected');
+  describe('#connected', function() {
+
+    it('there is a function named #connected', function() {
+      assert(_.isFunction(obj.connected));
+    });
+
+    it('objects 1 & 2 are NOT connected', function() {
+      assert(!obj.connected(1,2));
+    });
   });
 
-  t.test('#union', function(u) {
-    u.plan(3);
-    u.ok(_.isFunction(obj.union), 'there is a function named #union');
-    console.log('about to perform union(1, 2)');
-    obj.union(1,2);
-    u.ok(h.areTwoArraysEqual(obj.ids, [0,2,2,3,4]), 'moves 2 under 1');
-    console.log('about to perform union(0, 4)');
-    obj.union(0,4);
-    u.ok(h.areTwoArraysEqual(obj.ids, [4,2,2,3,4]), 'moves 0 under 4');
+  describe('#union', function() {
+    it('there is a function named #union', function() {
+      assert(_.isFunction(obj.union));
+    });
+
+    it('moves 2 under 1', function() {
+      obj.union(1,2);
+      assert(h.areTwoArraysEqual(obj.ids, [0,2,2,3,4]));
+    });
+
+    it('moves 0 under 4', function() {
+      obj.union(0,4);
+      assert(h.areTwoArraysEqual(obj.ids, [4,2,2,3,4]));
+    });
+
   });
 
-  t.test('combining these methods', function(u) {
-    u.plan(8);
-
+  describe('combining these methods', function() {
     var anotherObj = new QuickFind(10);
 
-    u.ok(
-      h.areTwoArraysEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,9]),
-      'instantiating an object with n of 10, produces this array'
-    );
+    it('instantiating an object with n of 10, produces this array', function() {
+      assert(h.areTwoArraysEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,9]));
+    });
 
-    u.equal(anotherObj.count, 10, 'before a union operation, has count of 10');
+    context('before one union operation', function() {
+      it('has count of 10', function() {
+        assert(anotherObj.count, 10);
+      });
+    });
 
-    console.log('about to perform union(9, 7)');
-    anotherObj.union(9, 7);
+    context('after one union operation', function() {
+      anotherObj.union(9, 7);
 
-    u.equal(anotherObj.count, 9, 'after a union operation, has count of 9');
+      it('has count of 9', function() {
+        assert(anotherObj.count, 9);
+      });
 
-    u.ok(
-      h.areTwoArraysEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,7]),
-      'moves 9 under 7'
-    );
+      it('moves 9 under 7', function() {
+        assert(h.areTwoArraysEqual(anotherObj.ids, [0,1,2,3,4,5,6,7,8,7]));
+      });
 
-    u.ok(
-      anotherObj.connected(7, 9),
-      'nodes 7 & 9 are connected'
-    );
+      it('confirms nodes 7 & 9 are connected', function() {
+        assert(anotherObj.connected(7, 9));
+      });
 
-    u.notOk(
-      anotherObj.connected(2, 8),
-      'nodes 2 & 8 are not connected'
-    );
+      it('confirms nodes 2 & 8 are NOT connected', function() {
+        assert(!anotherObj.connected(2, 8));
+      });
+    });
 
-    console.log('about to perform a bunch more union operations...');
-    anotherObj.union(9, 5);
-    anotherObj.union(4, 5);
-    anotherObj.union(8, 7);
-    anotherObj.union(3, 8);
-    anotherObj.union(7, 0);
+    context('after performing a bunch more union operations...', function() {
+      anotherObj.union(9, 5);
+      anotherObj.union(4, 5);
+      anotherObj.union(8, 7);
+      anotherObj.union(3, 8);
+      anotherObj.union(7, 0);
 
-    u.ok(
-      h.areTwoArraysEqual(anotherObj.ids, [0,1,2,0,0,0,6,0,0,0]),
-      'after all these moves, produces this array'
-    );
+      it('produces this array', function() {
+        assert(h.areTwoArraysEqual(anotherObj.ids, [0,1,2,0,0,0,6,0,0,0]));
+      });
 
-    u.equal(anotherObj.count, 4, 'after union operations, has count of 4');
+      it('has a count of 4', function() {
+        assert.equal(anotherObj.count, 4);
+      });
+
+    });
+
   });
 
 });
