@@ -1,4 +1,4 @@
-var QuickFind = require('../../lib/quickFind.js');
+var QuickFind = require('../../').QuickFind;
 
 var assert = require('assert');
 var _ = require('lodash');
