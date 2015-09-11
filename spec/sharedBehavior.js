@@ -37,3 +37,30 @@ exports.demonstratesInheritance = function(childObj, childConst, parentConst) {
   });
 
 };
+
+/**
+ * Verifying states of 3 properties of a weighted QuickUnion object after
+ * one call to `#union`
+ * @param wquObj, [Object] the weighted QuickUnion object
+ * @param twoNodes, [Array] values of the 2 parameters to pass to wquObj#union
+ * @param ids, [Array] the `ids` array you expect the obj to have afterwards
+ * @param sizes, [Array] the `sizes` array you expect the obj to have afterwards
+ * @param count, [Integer] the number of connected components you expect the
+ *   obj to have afterwards
+ */
+exports.theseStatesAfterUnionOp = function(wquObj, twoNodes, ids, sizes, count) {
+
+  beforeEach(function() { wquObj.union(twoNodes[0], twoNodes[1]); });
+
+  it('has this `ids` array', function() {
+    assert.deepEqual(wquObj.ids, ids);
+  });
+
+  it('has this `sizes` array', function() {
+    assert.deepEqual(wquObj.sizes, sizes);
+  });
+
+  it('has this many connected components', function() {
+    assert.equal(wquObj.count, count);
+  });
+};
