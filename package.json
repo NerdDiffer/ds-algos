@@ -2,8 +2,7 @@
   "name": "algorithms-part1-princeton-JS-implementations",
   "version": "0.0.1",
   "description": "Following a Coursera course on algorithms & data structures and implementing those in Javascript",
-  "main": "''",
-  "private": true,
+  "main": "./index.js",
   "dependencies": {
     "inherits": "^2.0.1",
     "lodash": "^3.10.1"
