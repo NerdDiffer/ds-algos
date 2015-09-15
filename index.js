@@ -9,5 +9,6 @@ module.exports = {
 };
 
 module.exports.sorts = {
+  insertionSort: sorts.insertionSort,
   selectionSort: sorts.selectionSort
 };
