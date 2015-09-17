@@ -37,20 +37,20 @@ var twoStack = function(exp) {
       // Matches are returned as strings. so make it an integer again.
       // Increment by the number of digits in the match
       var m = reNum.exec(exp.slice(i))[0];
-      numbers.push(parseInt(m));
+      numbers.add(parseInt(m));
       i += m.length;
     } else if (reOps.test(exp[i])) {
-      operators.push(exp[i]);
+      operators.add(exp[i]);
       i++;
     } else if (exp[i] === ')') {
       // Pop two from `numbers` array, pop one `operators` array.
       // Apply the operation.
       // Return result back to `numbers` array.
-      var n1 = numbers.pop().val;
-      var n2 = numbers.pop().val;
-      var op = operators.pop().val;
+      var n1 = numbers.remove().val;
+      var n2 = numbers.remove().val;
+      var op = operators.remove().val;
       var result = doMath([n1, n2], op);
-      numbers.push(result);
+      numbers.add(result);
       i++;
     } else {
       i++; // ignore
