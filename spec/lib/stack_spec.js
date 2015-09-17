@@ -11,21 +11,42 @@ describe('Stack: linked-list implementation', function() {
     assert.equal(stack.head, null);
   });
 
-  describe('#push', function() {
-    var stack = new StackLL();
+  describe('#add', function() {
 
-    it('adds an item to the front of the list', function() {
-      stack.push('a');
-      assert.deepEqual(stack.head, { val: 'a', next: null });
+    context('adding one node', function() {
+      var stack = new StackLL();
+      stack.add('a');
+
+      it('adds an item to the front of the list', function() {
+        assert.deepEqual(stack.head, { val: 'a', next: null });
+      });
+      it('confirms the next property is null', function() {
+        assert.equal(stack.head.next, null);
+      });
+    });
+    context('adding a second node', function () {
+      var stack = new StackLL();
+      stack.add('a');
+      stack.add('b');
+
+      it('the size is 2 nodes', function() {
+        assert.equal(stack.size(), 2);
+      });
+      it('the next property of new head node points to old head', function() {
+        assert.deepEqual(stack.head.next, { val: 'a', next: null });
+      });
+      it('the next property of last node should be null', function() {
+        assert.equal(stack.head.next.next, null);
+      });
     });
   });
 
-  describe('#pop', function() {
+  describe('#remove', function() {
     var stack = new StackLL();
-    stack.push('a');
+    stack.add('a');
 
     it('removes an item from the front of the list & returns it', function() {
-      assert.deepEqual(stack.pop(), { val: 'a', next: null });
+      assert.deepEqual(stack.remove(), { val: 'a', next: null });
     });
     it('the item is no longer available at front of list', function() {
       assert.equal(stack.head, null);
@@ -39,7 +60,7 @@ describe('Stack: linked-list implementation', function() {
       assert(stack.isEmpty());
     });
     it('otherwise returns false', function() {
-      stack.push('a');
+      stack.add('a');
       assert.equal(stack.isEmpty(), false);
     });
   });
@@ -48,21 +69,34 @@ describe('Stack: linked-list implementation', function() {
     var stack = new StackLL();
 
     it('returns the number of nodes in the stack', function() {
-      stack.push('a');
-      stack.push('b');
-      stack.push('c');
-      stack.push('d');
-      stack.push('e');
+      stack.add('a');
+      stack.add('b');
+      stack.add('c');
+      stack.add('d');
+      stack.add('e');
       assert.equal(stack.size(), 5);
     });
   });
 
+  describe('#each', function() {
+    var stack = new StackLL();
+    stack.add(1);
+    stack.add(2);
+    stack.add(3);
+    it('iterates through all the nodes', function() {
+      var m = [];
+      stack.each(function(n) {
+        m.push(n.val);
+      });
+      assert.deepEqual(m, [3,2,1]);
+    });
+  });
 });
 
 describe('Stack: array implementation', function() {
-  describe('#push', function() {
+  describe('#add', function() {
     var stack = new StackArr();
-    stack.push('a');
+    stack.add('a');
 
     it('adds items to end of array', function() {
       assert.deepEqual(stack.s, ['a']);
@@ -73,14 +107,14 @@ describe('Stack: array implementation', function() {
     });
   });
 
-  describe('#pop', function() {
+  describe('#remove', function() {
     var stack = new StackArr();
-    stack.push('1st item');
-    stack.push('2nd item');
-    stack.push('3rd item');
+    stack.add('1st item');
+    stack.add('2nd item');
+    stack.add('3rd item');
 
     it('returns an item from the array', function() {
-      assert.deepEqual(stack.pop(), '3rd item');
+      assert.deepEqual(stack.remove(), '3rd item');
     });
     it('confirms that the array does not have that removed item', function() {
       assert.deepEqual(stack.s, ['1st item', '2nd item']);
@@ -97,7 +131,7 @@ describe('Stack: array implementation', function() {
       assert(stack.isEmpty());
     });
     it('otherwise returns false', function() {
-      stack.push('a');
+      stack.add('a');
       assert.equal(stack.isEmpty(), false);
     });
   });
