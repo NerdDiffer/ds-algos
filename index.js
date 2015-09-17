@@ -10,5 +10,6 @@ module.exports = {
 
 module.exports.sorts = {
   insertionSort: sorts.insertionSort,
-  selectionSort: sorts.selectionSort
+  selectionSort: sorts.selectionSort,
+  shellSort: sorts.shellSort
 };
