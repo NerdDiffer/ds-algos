@@ -1,4 +1,4 @@
-var index    = require('../../');
+var index    = require('../../').ds;
 var StackLL  = index.StackLL;
 var StackArr = index.StackArr;
 

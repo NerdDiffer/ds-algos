@@ -1,4 +1,4 @@
-var QuickFind = require('../../').QuickFind;
+var QuickFind = require('../../').ds.QuickFind;
 
 var assert = require('assert');
 var _ = require('lodash');

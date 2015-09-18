@@ -1,5 +1,5 @@
-var QuickUnion     = require('../../').QuickUnion;
-var QuickFind      = require('../../').QuickFind;
+var QuickUnion     = require('../../').ds.QuickUnion;
+var QuickFind      = require('../../').ds.QuickFind;
 var sharedBehavior = require('../sharedBehavior.js');
 
 var assert = require('assert');
