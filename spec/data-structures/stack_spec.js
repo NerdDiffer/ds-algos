@@ -6,9 +6,18 @@ var assert = require('assert');
 
 describe('Stack: linked-list implementation', function() {
 
-  it('upon initialization, the head node is null', function() {
+  describe('inheritance from LinkedList', function() {
     var stack = new StackLL();
-    assert.equal(stack.head, null);
+    var LinkedList = index.LinkedList;
+    var sharedBehavior = require('../sharedBehavior.js');
+    sharedBehavior.demonstratesInheritance(stack, StackLL, LinkedList);
+  });
+
+  describe('upon initialization', function() {
+    it('the head node is null', function() {
+      var stack = new StackLL();
+      assert.equal(stack.head, null);
+    });
   });
 
   describe('#add', function() {

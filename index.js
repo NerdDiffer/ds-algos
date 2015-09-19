@@ -3,6 +3,7 @@ var sorts = require('./lib/sorting');
 
 // export data structures
 module.exports.ds = {
+  LinkedList: ds.LinkedList,
   StackArr:   ds.StackArr,
   StackLL:    ds.StackLL,
   QuickFind:  ds.QuickFind,
