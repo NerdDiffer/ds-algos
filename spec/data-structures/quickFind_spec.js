@@ -1,7 +1,5 @@
 var QuickFind = require('../../').ds.QuickFind;
-
 var assert = require('assert');
-var _ = require('lodash');
 
 describe('QuickFind', function() {
 
@@ -25,10 +23,6 @@ describe('QuickFind', function() {
 
   describe('#ids', function() {
 
-    it('returns an array', function() {
-      assert(_.isArray(obj.ids), '#ids is an array');
-    });
-
     it('#ids has a length of 5', function() {
       assert.equal(obj.ids.length, 5);
     });
@@ -47,20 +41,12 @@ describe('QuickFind', function() {
 
   describe('#connected', function() {
 
-    it('there is a function named #connected', function() {
-      assert(_.isFunction(obj.connected));
-    });
-
     it('objects 1 & 2 are NOT connected', function() {
       assert(!obj.connected(1,2));
     });
   });
 
   describe('#union', function() {
-    it('there is a function named #union', function() {
-      assert(_.isFunction(obj.union));
-    });
-
     it('moves 2 under 1', function() {
       obj.union(1,2);
       assert.deepEqual(obj.ids, [0,2,2,3,4]);
