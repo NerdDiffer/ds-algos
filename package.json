@@ -4,7 +4,8 @@
   "description": "Following a Coursera course on algorithms & data structures and implementing those in Javascript",
   "main": "./index.js",
   "dependencies": {
-    "inherits": "^2.0.1"
+    "inherits": "^2.0.1",
+    "total-sorta": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^2.3.2"
