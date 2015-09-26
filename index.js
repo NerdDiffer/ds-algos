@@ -6,6 +6,7 @@ module.exports.ds = {
   LinkedList: ds.LinkedList,
   StackArr:   ds.StackArr,
   StackLL:    ds.StackLL,
+  QueueLL:    ds.QueueLL,
   QuickFind:  ds.QuickFind,
   QuickUnion: ds.QuickUnion
 };
