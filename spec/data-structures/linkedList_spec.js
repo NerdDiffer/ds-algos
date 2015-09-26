@@ -16,14 +16,14 @@ describe('LinkedList', function() {
   });
 
   describe('#push', function() {
-    context('pushing one item', function() {
+    context('adding one item', function() {
       var list = new LinkedList();
       list.push('a');
       it('has a head node with val "a"', function() {
         assert.equal(list.head.val, 'a');
       });
     });
-    context('pushing multiple items', function() {
+    context('adding multiple items', function() {
       var list;
       beforeEach(function() {
         list = new LinkedList();
@@ -41,7 +41,7 @@ describe('LinkedList', function() {
   });
 
   describe('#pop', function() {
-    context('popping one item', function() {
+    context('removing one item', function() {
       var list;
       beforeEach(function() {
         list = new LinkedList();
@@ -66,11 +66,46 @@ describe('LinkedList', function() {
   });
 
   describe('#unshift', function() {
-    // this is tested by the StackLL data structure
+    context('adding one item', function() {
+      var list = new LinkedList();
+      list.unshift('a');
+
+      it('adds an item to the front of the list', function() {
+        assert.deepEqual(list.head, { val: 'a', next: null });
+      });
+      it('confirms the next property is null', function() {
+        assert.equal(list.head.next, null);
+      });
+    });
+    context('adding a second item', function () {
+      var list = new LinkedList();
+      list.unshift('a');
+      list.unshift('b');
+
+      it('the size is 2 nodes', function() {
+        assert.equal(list.size(), 2);
+      });
+      it('the next property of new head node points to old head', function() {
+        assert.deepEqual(list.head.next, { val: 'a', next: null });
+      });
+      it('the next property of last node should be null', function() {
+        assert.equal(list.head.next.next, null);
+      });
+    });
   });
 
   describe('#shift', function() {
-    // this is tested by the StackLL data structure
+    context('removing one item', function() {
+      var list = new LinkedList();
+      list.unshift('a');
+
+      it('removes an item from the front of the list & returns it', function() {
+        assert.deepEqual(list.shift(), { val: 'a', next: null });
+      });
+      it('the item is no longer available at front of list', function() {
+        assert.equal(list.head, null);
+      });
+    });
   });
 
   describe('#findPenultimate', function() {
@@ -90,6 +125,45 @@ describe('LinkedList', function() {
     list.push(3);
     it('returns the last node in the list', function() {
       assert.equal(list.findLast().val, 3);
+    });
+  });
+
+  describe('#isEmpty', function() {
+    var list = new LinkedList();
+
+    it('returns true when the head node is null', function() {
+      assert(list.isEmpty());
+    });
+    it('otherwise returns false', function() {
+      list.push('a');
+      assert.equal(list.isEmpty(), false);
+    });
+  });
+
+  describe('#size', function() {
+    var list = new LinkedList();
+
+    it('returns the number of nodes in the list', function() {
+      list.push('a');
+      list.push('b');
+      list.push('c');
+      list.push('d');
+      list.push('e');
+      assert.equal(list.size(), 5);
+    });
+  });
+
+  describe('#each', function() {
+    var list = new LinkedList();
+    list.unshift(1);
+    list.unshift(2);
+    list.unshift(3);
+    it('iterates through all the nodes', function() {
+      var m = [];
+      list.each(function(n) {
+        m.push(n.val);
+      });
+      assert.deepEqual(m, [3,2,1]);
     });
   });
 });
