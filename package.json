@@ -1,6 +1,6 @@
 {
   "name": "algorithms-part1-princeton-JS-implementations",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Following a Coursera course on algorithms & data structures and implementing those in Javascript",
   "main": "./index.js",
   "dependencies": {
@@ -11,7 +11,7 @@
     "mocha": "^2.3.2"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./spec/**/*.js"
+    "test": "mocha ./spec/**/*.js"
   },
   "author": {
     "name": "Rafael Espinoza",
