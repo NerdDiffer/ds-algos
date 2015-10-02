@@ -15,6 +15,7 @@ module.exports.ds = {
 module.exports.sorts = {
   insertionSort:  sorts.insertionSort,
   mergeSort:      sorts.mergeSort,
+  mergeSort_bottomUp:      sorts.mergeSort_bottomUp,
   quickSort:      sorts.quickSort,
   quickSort_3way: sorts.quickSort_3way,
   selectionSort:  sorts.selectionSort,
