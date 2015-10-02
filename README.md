@@ -24,6 +24,7 @@ of these, I am learning from a Coursera course, taught with Java.
 * Insertion sort
 * Merge sort
 * Quick sort
+  * variations with/without 3-way partitioning
 * Selection sort
 * Shell sort
 

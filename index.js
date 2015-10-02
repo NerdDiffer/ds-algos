@@ -13,9 +13,10 @@ module.exports.ds = {
 
 // export sorting algorithms
 module.exports.sorts = {
-  insertionSort: sorts.insertionSort,
-  mergeSort:     sorts.mergeSort,
-  quickSort:     sorts.quickSort,
-  selectionSort: sorts.selectionSort,
-  shellSort:     sorts.shellSort
+  insertionSort:  sorts.insertionSort,
+  mergeSort:      sorts.mergeSort,
+  quickSort:      sorts.quickSort,
+  quickSort_3way: sorts.quickSort_3way,
+  selectionSort:  sorts.selectionSort,
+  shellSort:      sorts.shellSort
 };
