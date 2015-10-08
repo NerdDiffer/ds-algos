@@ -18,13 +18,21 @@ of these, I am learning from a Coursera course, taught with Java.
 * Stack
   * array implementation
   * linked list implementation
+* Symbol Table
+
+### Search data structures
+
+* Binary Search Tree
+* Ordered Symbol Table
+* Sequential Search
 
 ### Sorting algorithms
 
 * Insertion sort
 * Merge sort
+  * top-down & bottom-up variations
 * Quick sort
-  * variations with/without 3-way partitioning
+  * variations with & without 3-way partitioning
 * Selection sort
 * Shell sort
 
