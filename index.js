@@ -17,6 +17,7 @@ module.exports.ds = {
 module.exports.search = {
   BinarySearchTree:   search.BinarySearchTree,
   OrderedSymbolTable: search.OrderedSymbolTable,
+  RedBlackTree:       search.RedBlackTree,
   SequentialSearch:   search.SequentialSearch
 };
 
