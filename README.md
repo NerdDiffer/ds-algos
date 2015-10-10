@@ -24,6 +24,7 @@ of these, I am learning from a Coursera course, taught with Java.
 
 * Binary Search Tree
 * Ordered Symbol Table
+* Red Black Tree (left-leaning)
 * Sequential Search
 
 ### Sorting algorithms

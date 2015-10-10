@@ -30,7 +30,7 @@ module.exports.expectedOutcomes = function(rbt) {
 
   var expectedLeftNode = {
     key: 'ambient',
-    val: '',
+    val: 'anvil',
     left: null,
     right: null,
     count: 1,
@@ -38,7 +38,7 @@ module.exports.expectedOutcomes = function(rbt) {
   };
   var expectedRightNode = {
     key: 'cool jazz',
-    val: '',
+    val: 'clarinet',
     left: null,
     right: null,
     count: 1,
@@ -46,7 +46,7 @@ module.exports.expectedOutcomes = function(rbt) {
   };
   var expectedRoot = {
     key: 'bluegrass',
-    val: '',
+    val: 'banjo',
     left: expectedLeftNode,
     right: expectedRightNode,
     count: 3,

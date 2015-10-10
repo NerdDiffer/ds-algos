@@ -4,6 +4,34 @@ var RedBlackTree = require('../../').search.RedBlackTree;
 var sharedStuff = require('./_redBlackTree_sharedStuff.js');
 
 describe('RedBlackTree', function () {
+
+  // These are templates of mocks for comparing nodes in the tree.
+  // They're passed in to the `generateThreeNode` helper method.
+  var baseNodeA = {
+    key: 'ambient',
+    val: 'anvil',
+    left: null,
+    right: null,
+    count: 1,
+    color: false
+  };
+  var baseNodeB = {
+    key: 'bluegrass',
+    val: 'banjo',
+    left: null,
+    right: null,
+    count: 1,
+    color: false
+  };
+  var baseNodeC = {
+    key: 'cool jazz',
+    val: 'clarinet',
+    left: null,
+    right: null,
+    count: 1,
+    color: false
+  };
+
   describe('the root', function() {
     var rbt = new RedBlackTree();
     it('by default, has a root node of null', function() {
@@ -14,16 +42,8 @@ describe('RedBlackTree', function () {
   describe('#get', function() {
     var rbt = new RedBlackTree();
     it('returns the node', function() {
-      var expected = {
-        key: 'klezmer',
-        val: 'violin',
-        left: null,
-        right: null,
-        count: 1,
-        color: false // color of parent link
-      };
-      rbt.put('klezmer', 'violin');
-      assert.deepEqual(rbt.get('klezmer'), expected);
+      rbt.put('bluegrass', 'banjo');
+      assert.deepEqual(rbt.get('bluegrass'), baseNodeB);
     });
     it('returns null when key is not in any node in the tree', function() {
       assert.equal(rbt.get('not here mate'), null);
@@ -35,16 +55,8 @@ describe('RedBlackTree', function () {
     context('adding a root node', function() {
       var rbt = new RedBlackTree();
       it('adds the root to a tree', function() {
-        var expected = {
-          key: 'klezmer',
-          val: 'violin',
-          left: null,
-          right: null,
-          count: 1,
-          color: false
-        };
-        rbt.put('klezmer', 'violin');
-        assert.deepEqual(rbt.root, expected);
+        rbt.put('cool jazz', 'clarinet');
+        assert.deepEqual(rbt.root, baseNodeC);
       });
       it('link to potential parent is black, not red', function() {
         assert.equal(rbt.root.color, false);
@@ -54,50 +66,35 @@ describe('RedBlackTree', function () {
     context('inserting into a 2-node', function() {
 
       context('to the left of root', function() {
+
         var rbt = new RedBlackTree();
+        var mockA = sharedStuff.generateThreeNode(baseNodeA);
+        var mockB = sharedStuff.generateThreeNode(baseNodeB);
+
         before('add the root', function() {
-          rbt.put('bebop', 'alto sax');
+          rbt.put('bluegrass', 'banjo');
         });
 
         context('before adding a node', function() {
-          var expectedRoot = {
-            key: 'bebop',
-            val: 'alto sax',
-            left: null,
-            right: null,
-            count: 1,
-            color: false
-          };
           it('this is the root', function() {
-            assert.deepEqual(rbt.root, expectedRoot);
+            assert.deepEqual(rbt.root, mockB);
           });
         });
 
         context('adding a node', function() {
           it('adds a 2nd node', function() {
-            rbt.put('avant-garde', 'vuvuzuela');
+            rbt.put('ambient', 'anvil');
           });
         });
 
         context('after adding a node', function() {
-          var expectedLeftNode = {
-            key: 'avant-garde',
-            val: 'vuvuzuela',
-            left: null,
-            right: null,
-            count: 1,
-            color: true
-          };
-          var expectedRoot = {
-            key: 'bebop',
-            val: 'alto sax',
-            left: expectedLeftNode,
-            right: null,
-            count: 2,
-            color: false
-          };
+          before('update mock nodes', function() {
+            mockB.left = mockA;
+            mockB.count = 2;
+            mockA.color = true;
+          });
           it('this is the updated root node', function() {
-            assert.deepEqual(rbt.root, expectedRoot);
+            assert.deepEqual(rbt.root, mockB);
           });
         });
 
@@ -106,49 +103,33 @@ describe('RedBlackTree', function () {
       context('when root key is less than key of new node', function() {
 
         var rbt = new RedBlackTree();
+        var mockA = sharedStuff.generateThreeNode(baseNodeA);
+        var mockB = sharedStuff.generateThreeNode(baseNodeB);
+
         before('add the root', function() {
-          rbt.put('avant-garde', 'chime');
+          rbt.put('ambient', 'anvil');
         });
 
         context('before adding a node', function() {
-          var expectedRoot = {
-            key: 'avant-garde',
-            val: 'chime',
-            left: null,
-            right: null,
-            count: 1,
-            color: false
-          };
           it('this is the root node', function() {
-            assert.deepEqual(rbt.root, expectedRoot);
+            assert.deepEqual(rbt.root, mockA);
           });
         });
 
         context('adding a node', function() {
           it('adds a 2nd node', function() {
-            rbt.put('bluegrass', 'steel-string guitar');
+            rbt.put('bluegrass', 'banjo');
           });
         });
 
         context('after adding a node', function() {
-          var expectedLeftNode = {
-            key: 'avant-garde',
-            val: 'chime',
-            left: null,
-            right: null,
-            count: 1,
-            color: true
-          };
-          var expectedRoot = {
-            key: 'bluegrass',
-            val: 'steel-string guitar',
-            left: expectedLeftNode,
-            right: null,
-            count: 2,
-            color: false
-          };
-          it('now, this is the root node', function() {
-            assert.deepEqual(rbt.root, expectedRoot);
+          before('update mock nodes', function() {
+            mockB.left = mockA;
+            mockB.count = 2;
+            mockA.color = true;
+          });
+          it('this is the updated root node', function() {
+            assert.deepEqual(rbt.root, mockB);
           });
         });
       });
@@ -157,40 +138,13 @@ describe('RedBlackTree', function () {
 
     context('inserting into a 3-node', function() {
 
-      // These are templates of mocks for comparing nodes in the tree.
-      // They're passed in to the `generateThreeNode` helper method.
-      var baseNodeA = {
-        key: 'ambient',
-        val: '',
-        left: null,
-        right: null,
-        count: 1,
-        color: false
-      };
-      var baseNodeB = {
-        key: 'bluegrass',
-        val: '',
-        left: null,
-        right: null,
-        count: 1,
-        color: false
-      };
-      var baseNodeC = {
-        key: 'cool jazz',
-        val: '',
-        left: null,
-        right: null,
-        count: 1,
-        color: false
-      };
-
       context('when new node is larger than both nodes', function() {
 
         var rbt = new RedBlackTree();
 
         before('add a 3-node at root', function() {
-          rbt.put('bluegrass', '');
-          rbt.put('ambient', '');
+          rbt.put('bluegrass', 'banjo');
+          rbt.put('ambient', 'anvil');
         });
 
         context('before adding a new node', function() {
@@ -212,7 +166,7 @@ describe('RedBlackTree', function () {
 
         context('adding a node', function() {
           it('adds a new node higher than both nodes', function() {
-            rbt.put('cool jazz', '');
+            rbt.put('cool jazz', 'clarinet');
           });
         });
 
@@ -226,8 +180,8 @@ describe('RedBlackTree', function () {
         var rbt = new RedBlackTree();
 
         before('add a 3-node at root', function() {
-          rbt.put('bluegrass', '');
-          rbt.put('cool jazz', '');
+          rbt.put('bluegrass', 'banjo');
+          rbt.put('cool jazz', 'clarinet');
         });
 
         context('before adding a new node', function() {
@@ -249,7 +203,7 @@ describe('RedBlackTree', function () {
 
         context('adding a node', function() {
           it('adds a new node higher than both nodes', function() {
-            rbt.put('ambient', '');
+            rbt.put('ambient', 'anvil');
           });
         });
 
@@ -258,12 +212,12 @@ describe('RedBlackTree', function () {
         });
       });
 
-      context('when new node is in between than both nodes', function() {
+      context('when new node is in between both nodes', function() {
 
         var rbt = new RedBlackTree();
         before('add a 3-node at root', function() {
-          rbt.put('ambient', '');
-          rbt.put('cool jazz', '');
+          rbt.put('ambient', 'anvil');
+          rbt.put('cool jazz', 'clarinet');
         });
 
         context('before adding a new node', function() {
@@ -284,7 +238,7 @@ describe('RedBlackTree', function () {
 
         context('adding a node', function() {
           it('adds a new node higher than both nodes', function() {
-            rbt.put('bluegrass', '');
+            rbt.put('bluegrass', 'banjo');
           });
         });
 
