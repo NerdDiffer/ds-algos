@@ -573,4 +573,41 @@ describe('BinarySearchTree', function() {
     });
   });
 
+  describe('#traverse', function() {
+    var bst = new BST();
+    before('populate tree', function() {
+      bst.put(10, 'dieci');
+      bst.put(6,  'sei');
+      bst.put(14, 'quattordice');
+      bst.put(8,  'otto');
+      bst.put(4,  'quattro');
+      bst.put(16, 'diecisei');
+      bst.put(12, 'dodice');
+    });
+    context('pre-order traversal', function() {
+      it('visits the nodes in pre-order', function() {
+        var ord = [10,6,4,8,14,12,16];
+        assert.deepEqual(bst.traverse({order: 'preOrder'}), ord);
+      });
+    });
+    context('in-order traversal', function() {
+      it('visits the nodes in-order', function() {
+        var ord = [4,6,8,10,12,14,16];
+        assert.deepEqual(bst.traverse({order: 'inOrder'}), ord);
+      });
+    });
+    context('post-order traversal', function() {
+      it('visits the nodes in post-order', function() {
+        var ord = [4,8,6,12,16,14,10];
+        assert.deepEqual(bst.traverse({order: 'postOrder'}), ord);
+      });
+    });
+    context('breadth-first traversal', function() {
+      it('visits the nodes level-by-level, left-to-right', function() {
+        var ord = [10,6,14,4,8,12,16];
+        assert.deepEqual(bst.traverse({order: 'breadthFirst'}), ord);
+      });
+    });
+  });
+
 });
