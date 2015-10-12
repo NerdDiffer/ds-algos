@@ -1,24 +1,11 @@
 var assert = require('assert');
 
-/**
- * Generate a copy of an object that is a stand-in for a ThreeNode.
- * @param keysAndVals, an object containing keys & values.
- * @return, a mock ThreeNode object
- */
+var generateMockNode = require('./_generateMockNode.js');
+
+// wrapper for the generic node generation method. I'm too lazy to change calls
+// in the RedBlackTree specs right now...
 module.exports.generateThreeNode = function(keysAndVals) {
-  function ThreeNode(obj) {
-    // This could get ugly...
-    //for (var key in obj) {
-    //  this[key] = obj[key];
-    //}
-    this.key = obj.key;
-    this.val = obj.val;
-    this.left = obj.left;
-    this.right = obj.right;
-    this.count = obj.count;
-    this.color = obj.color;
-  }
-  return new ThreeNode(keysAndVals);
+  return generateMockNode(keysAndVals);
 };
 
 /**

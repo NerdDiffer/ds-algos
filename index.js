@@ -16,6 +16,7 @@ module.exports.ds = {
 // export searching algorithms/data structures
 module.exports.search = {
   BinarySearchTree:   search.BinarySearchTree,
+  IntervalSearchTree: search.IntervalSearchTree,
   OrderedSymbolTable: search.OrderedSymbolTable,
   RedBlackTree:       search.RedBlackTree,
   SequentialSearch:   search.SequentialSearch
