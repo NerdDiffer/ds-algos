@@ -23,6 +23,8 @@ of these, I am learning from a Coursera course, taught with Java.
 ### Search data structures
 
 * Binary Search Tree
+* Interval Search Tree
+  * 1-dimensional intervals
 * Ordered Symbol Table
 * Red Black Tree (left-leaning)
 * Sequential Search

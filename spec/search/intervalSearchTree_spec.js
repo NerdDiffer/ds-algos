@@ -6,9 +6,10 @@ describe('IntervalSearchTree', function() {
 
   /**
    * Templates for mock nodes.
-   * If you inserted them, in this order:
-   * (17, 19) (5, 8) (21, 24) (4, 8) (15, 18) (7, 10) (16, 22)
-   * then it would look like this
+   * If you inserted them in this order:
+   *   (17, 19) (5, 8) (21, 24) (4, 8) (15, 18) (7, 10) (16, 22)
+   * then it would look like this:
+   *
    *         (17, 19)
    *         /      \
    *     (5, 8)     (21, 24)
@@ -216,6 +217,25 @@ describe('IntervalSearchTree', function() {
       it('returns null', function() {
         assert.deepEqual(ist.get(12, 14), null);
       });
+    });
+  });
+
+  describe('#getAll', function() {
+    var ist = new IST();
+    before('populate the tree', function() {
+      ist.put(17, 19, '');
+      ist.put(5, 8, '');
+      ist.put(21, 24, '');
+      ist.put(4, 8, '');
+      ist.put(15, 18, '');
+      ist.put(7, 10, '');
+      ist.put(16, 22, '');
+    });
+    it('returns all intersecting intervals for a given point', function() {
+      var intersections = [
+        [17,19], [15,18], [16,22]
+      ];
+      assert.deepEqual(ist.getAll(16, 22), intersections);
     });
   });
 
