@@ -5,6 +5,7 @@ var sorts  = require('./lib/sorting');
 // export data structures
 module.exports.ds = {
   LinkedList:       ds.LinkedList,
+  PriorityQueue:    ds.PriorityQueue,
   StackArr:         ds.StackArr,
   StackLL:          ds.StackLL,
   SymbolTable:      ds.SymbolTable,

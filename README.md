@@ -9,6 +9,8 @@ of these, I am learning from a Coursera course, taught with Java.
 
 * Linked List
   * singly-linked
+* Priority Queue
+  * ordered array implementation
 * Queue
   * linked list implementation
 * Quick Find
