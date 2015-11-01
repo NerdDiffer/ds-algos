@@ -4,6 +4,7 @@ var sorts  = require('./lib/sorting');
 
 // export data structures
 module.exports.ds = {
+  BinaryHeap:       ds.BinaryHeap,
   LinkedList:       ds.LinkedList,
   PriorityQueue:    ds.PriorityQueue,
   StackArr:         ds.StackArr,
