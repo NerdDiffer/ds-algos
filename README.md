@@ -7,6 +7,8 @@ of these, I am learning from a Coursera course, taught with Java.
 
 ### Data structures
 
+* Binary Heap
+  * max-oriented
 * Linked List
   * singly-linked
 * Priority Queue
